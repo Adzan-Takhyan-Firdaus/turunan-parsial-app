@@ -1,6 +1,6 @@
 import streamlit as st
-from turunan_2var import tampilkan_turunan_2var
-from turunan_3var import tampilkan_turunan_3var
+from turunan_2var import tampilkan_turunan_parsial_2var_app
+from turunan_3var import tampilkan_turunan_parsial_3var_app
 
 def tampilkan_menu_pilihan():
     st.title("🧠 Pilih Jenis Turunan Parsial")
