@@ -25,9 +25,10 @@ def tampilkan_menu_pilihan():
         if st.session_state["trial"] and st.session_state["trial_count"] >= 3:
             st.error("❌ Sesi trial habis. Silakan login.")
             if st.button("Keluar"):
-                st.session_state.clear()
+                st.session_state.clear()  # reset semua session
                 st.experimental_rerun()
-            return
+                st.stop()  # berhentiin eksekusi Streamlit setelah rerun
+
 
 
         if st.session_state["mode"] == "2var":
