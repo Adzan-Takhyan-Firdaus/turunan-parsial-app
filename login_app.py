@@ -2,8 +2,8 @@ import streamlit as st
 from menu_pilihan import tampilkan_menu_pilihan
 
 users = {
-    "adzan": "ganteng123",
-    "admin": "admin123"
+    "adzan": "ganteng",
+    "admin": "admin"
 }
 
 if "login" not in st.session_state:
