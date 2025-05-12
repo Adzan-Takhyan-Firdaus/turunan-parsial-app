@@ -24,10 +24,10 @@ def tampilkan_menu_pilihan():
     if "mode" in st.session_state:
         if st.session_state["trial"] and st.session_state["trial_count"] >= 3:
             st.error("❌ Sesi trial habis. Silakan login.")
-        if st.button("Keluar"):
-            st.session_state.clear()
-            st.experimental_rerun()
-        return
+            if st.button("Keluar"):
+                st.session_state.clear()
+                st.experimental_rerun()
+            return
 
 
         if st.session_state["mode"] == "2var":
