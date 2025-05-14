@@ -33,7 +33,7 @@ def tampilkan_turunan_2var():
             sisa = 3 - st.session_state["trial_count"]
             st.info(f"Sisa penggunaan trial: {sisa}")
 
-        # Grafik permukaan dan bidang singgung (3D)
+        # Grafik 3D: Permukaan fungsi dan bidang singgung
         x_vals = np.linspace(x0 - 2, x0 + 2, 50)
         y_vals = np.linspace(y0 - 2, y0 + 2, 50)
         X, Y = np.meshgrid(x_vals, y_vals)
@@ -44,10 +44,11 @@ def tampilkan_turunan_2var():
         ax = fig3d.add_subplot(111, projection='3d')
         ax.plot_surface(X, Y, Z, alpha=0.7, cmap='viridis')
         ax.plot_surface(X, Y, Z_tangent, alpha=0.5, color='red')
+        st.subheader("🌐 Grafik Permukaan dan Bidang Singgung (3D)")
         st.pyplot(fig3d)
 
-        # Grafik batang (2D)
-        st.subheader("📊 Visualisasi Nilai Numerik (2D)")
+        # Grafik batang 2D
+        st.subheader("📊 Grafik Batang 2D: Nilai f(x, y), ∂f/∂x, ∂f/∂y")
         labels = ['f(x, y)', '∂f/∂x', '∂f/∂y']
         values = [float(f_val), float(fx_val), float(fy_val)]
         bar_colors = ['royalblue', 'tomato', 'orange']
@@ -55,7 +56,7 @@ def tampilkan_turunan_2var():
         fig2d, ax2 = plt.subplots()
         ax2.bar(labels, values, color=bar_colors)
         ax2.set_ylabel("Nilai")
-        ax2.set_title("Nilai Fungsi dan Turunan Parsial")
+        ax2.set_title("Hasil Evaluasi di Titik (x₀, y₀)")
         st.pyplot(fig2d)
 
     except Exception as e:
