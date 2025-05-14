@@ -33,17 +33,30 @@ def tampilkan_turunan_2var():
             sisa = 3 - st.session_state["trial_count"]
             st.info(f"Sisa penggunaan trial: {sisa}")
 
+        # Grafik permukaan dan bidang singgung (3D)
         x_vals = np.linspace(x0 - 2, x0 + 2, 50)
         y_vals = np.linspace(y0 - 2, y0 + 2, 50)
         X, Y = np.meshgrid(x_vals, y_vals)
         Z = sp.lambdify((x, y), f, 'numpy')(X, Y)
         Z_tangent = float(f_val) + float(fx_val)*(X - x0) + float(fy_val)*(Y - y0)
 
-        fig = plt.figure()
-        ax = fig.add_subplot(111, projection='3d')
+        fig3d = plt.figure()
+        ax = fig3d.add_subplot(111, projection='3d')
         ax.plot_surface(X, Y, Z, alpha=0.7, cmap='viridis')
         ax.plot_surface(X, Y, Z_tangent, alpha=0.5, color='red')
-        st.pyplot(fig)
+        st.pyplot(fig3d)
+
+        # Grafik batang (2D)
+        st.subheader("📊 Visualisasi Nilai Numerik (2D)")
+        labels = ['f(x, y)', '∂f/∂x', '∂f/∂y']
+        values = [float(f_val), float(fx_val), float(fy_val)]
+        bar_colors = ['royalblue', 'tomato', 'orange']
+
+        fig2d, ax2 = plt.subplots()
+        ax2.bar(labels, values, color=bar_colors)
+        ax2.set_ylabel("Nilai")
+        ax2.set_title("Nilai Fungsi dan Turunan Parsial")
+        st.pyplot(fig2d)
 
     except Exception as e:
         st.error(f"Terjadi kesalahan: {e}")
