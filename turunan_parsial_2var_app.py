@@ -33,37 +33,31 @@ def tampilkan_turunan_2var():
             sisa = 3 - st.session_state["trial_count"]
             st.info(f"Sisa penggunaan trial: {sisa}")
 
-        # Hitung grafik 3D dan 2D
+        # Grafik 3D: Permukaan fungsi dan bidang singgung
         x_vals = np.linspace(x0 - 2, x0 + 2, 50)
         y_vals = np.linspace(y0 - 2, y0 + 2, 50)
         X, Y = np.meshgrid(x_vals, y_vals)
         Z = sp.lambdify((x, y), f, 'numpy')(X, Y)
         Z_tangent = float(f_val) + float(fx_val)*(X - x0) + float(fy_val)*(Y - y0)
 
-        # Grafik 3D
         fig3d = plt.figure()
-        ax3d = fig3d.add_subplot(111, projection='3d')
-        ax3d.plot_surface(X, Y, Z, alpha=0.7, cmap='viridis')
-        ax3d.plot_surface(X, Y, Z_tangent, alpha=0.5, color='red')
-        ax3d.set_title("Grafik 3D Permukaan dan Bidang Singgung")
+        ax = fig3d.add_subplot(111, projection='3d')
+        ax.plot_surface(X, Y, Z, alpha=0.7, cmap='viridis')
+        ax.plot_surface(X, Y, Z_tangent, alpha=0.5, color='red')
+        st.subheader("🌐 Grafik Permukaan dan Bidang Singgung (3D)")
+        st.pyplot(fig3d)
 
-        # Grafik 2D batang
+        # Grafik batang 2D
+        st.subheader("📊 Grafik Batang 2D: Nilai f(x, y), ∂f/∂x, ∂f/∂y")
         labels = ['f(x, y)', '∂f/∂x', '∂f/∂y']
         values = [float(f_val), float(fx_val), float(fy_val)]
         bar_colors = ['royalblue', 'tomato', 'orange']
-        fig2d, ax2d = plt.subplots()
-        ax2d.bar(labels, values, color=bar_colors)
-        ax2d.set_ylabel("Nilai")
-        ax2d.set_title("Grafik 2D Nilai Evaluasi")
 
-        # Tampilkan grafik berdampingan
-        col1, col2 = st.columns(2)
-
-        with col1:
-            st.pyplot(fig3d)
-
-        with col2:
-            st.pyplot(fig2d)
+        fig2d, ax2 = plt.subplots()
+        ax2.bar(labels, values, color=bar_colors)
+        ax2.set_ylabel("Nilai")
+        ax2.set_title("Hasil Evaluasi di Titik (x₀, y₀)")
+        st.pyplot(fig2d)
 
     except Exception as e:
         st.error(f"Terjadi kesalahan: {e}")
