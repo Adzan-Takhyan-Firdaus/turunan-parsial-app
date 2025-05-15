@@ -1,5 +1,7 @@
 import streamlit as st
 import sympy as sp
+import numpy as np
+import matplotlib.pyplot as plt
 
 def tampilkan_turunan_3var():
     st.title("📗 Aplikasi Turunan Parsial 3 Variabel")
@@ -34,6 +36,18 @@ def tampilkan_turunan_3var():
             st.session_state["trial_count"] += 1
             sisa = 3 - st.session_state["trial_count"]
             st.info(f"Sisa penggunaan trial: {sisa}")
+
+        # Grafik batang 2D
+        st.subheader("📊 Grafik Batang 2D: Nilai f(x, y, z) dan Turunan Parsial")
+        labels = ['f(x, y, z)', '∂f/∂x', '∂f/∂y', '∂f/∂z']
+        values = [float(f_val), float(fx_val), float(fy_val), float(fz_val)]
+        bar_colors = ['royalblue', 'tomato', 'orange', 'seagreen']
+
+        fig, ax = plt.subplots()
+        ax.bar(labels, values, color=bar_colors)
+        ax.set_ylabel("Nilai")
+        ax.set_title("Hasil Evaluasi di Titik (x₀, y₀, z₀)")
+        st.pyplot(fig)
 
     except Exception as e:
         st.error(f"Terjadi kesalahan: {e}")
